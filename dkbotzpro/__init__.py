@@ -1,6 +1,6 @@
 import requests
 import base64
-from .links import *
+from .api import *
 class DKBotzPro:
     def __init__(self, service):
         self.service = service
