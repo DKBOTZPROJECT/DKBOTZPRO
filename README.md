@@ -29,7 +29,7 @@ if success:
 else:
     print(f"Error: {result}")
 ```
-2. Base64 Encoding
+<b>2. Base64 Encoding</b>
 
 You can encode any text into Base64 format using the encode() function.
 
@@ -43,7 +43,7 @@ dkbotzpro_base64 = DKBotzPro(service="base64")
 encoded_text = dkbotzpro_base64.encode(text="Hello")
 print(f"Encoded text: {encoded_text}")
 ```
-3. Base64 Decoding
+<b>3. Base64 Decoding</b>
 
 You can decode a Base64-encoded string back to its original form using the decode() function.
 
