@@ -11,7 +11,7 @@ class DKBotzPro:
         Returns a tuple: (True, qr_link) on success, (False, error_message) on failure.
         """
         if self.service == "upi_qr":
-            url = "https://api.dkbotzpro.in/qr/create/"
+            url = "https://api.dkbotzpro.in/qr/"
             params = {
                 'text': f'upi://pay?pa={upi_id}&pn={payee_name}&am={amount}&cu=INR'
             }
