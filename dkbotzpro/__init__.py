@@ -1,6 +1,6 @@
 import requests
 import base64
-
+from .links import *
 class DKBotzPro:
     def __init__(self, service):
         self.service = service
@@ -11,7 +11,7 @@ class DKBotzPro:
         Returns a tuple: (True, qr_link) on success, (False, error_message) on failure.
         """
         if self.service == "upi_qr":
-            url = "https://api.dkbotzpro.in/qr/"
+            url = QR_LINK
             params = {
                 'text': f'upi://pay?pa={upi_id}&pn={payee_name}&am={amount}&cu=INR'
             }
