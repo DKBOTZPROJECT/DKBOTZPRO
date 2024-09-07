@@ -12,7 +12,7 @@ You can install DKBotzPro using pip:
 pip install dkbotzpro
 ```
 # Usage
-__ 1. UPI QR Code Generation __
+<b>1. UPI QR Code Generation</b>
 
 You can easily generate a UPI QR code by passing your UPI ID, payee name, and amount to the convert() function.
 ```
