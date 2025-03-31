@@ -12,8 +12,9 @@ class DKBotzPro:
         self.service = service
 
         if service == "premium":
-            self.login = self.premium_login  
-            self.verify_product = self.premium_verify_product  
+            self.login = self.premium_login
+            self.verify_product = self.premium_verify_product
+            self.edit_server = self.premium_edit_server
         elif service == "upi_qr":
             self.execute = self.convert  # Allow only convert
         elif service == "base64":
@@ -37,7 +38,15 @@ class DKBotzPro:
             return response.json()
         except requests.exceptions.RequestException as e:
             return {"status": False, "message": f"An error occurred: {e}"}
-
+            
+    def premium_edit_server(self, username, password, servername, server_num, value):
+        params = {"username": username, "password": password, "product": product, "servername": servername, "server_num": server_num, "value": value}
+        try:
+            response = requests.get(PREMIUM_PRODUCT_VERIFY_API, params=params)
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            return {"status": False, "message": f"An error occurred: {e}"}
+            
     def convert(self, upi_id, payee_name, amount):
         url = QR_LINK
         params = {'text': f'upi://pay?pa={upi_id}&pn={payee_name}&am={amount}&cu=INR'}
