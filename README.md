@@ -1,9 +1,8 @@
-# DKBOTZPRO
+# 📌 DKBOTZPRO
 
+Welcome to **DKBOTZPRO**! 🚀 This library allows you to interact with multiple services dynamically, including premium authentication, UPI QR generation, and Base64 encoding/decoding.
 
-
-DKBotzPro is a Python package that helps Many things This is Free API 
-
+---
 ## Installation
 
 You can install DKBotzPro using pip:
@@ -11,53 +10,95 @@ You can install DKBotzPro using pip:
 ```
 pip install dkbotzpro
 ```
-# Usage
-<b>1. UPI QR Code Generation</b>
 
-You can easily generate a UPI QR code by passing your UPI ID, payee name, and amount to the convert() function.
-```
+
+## ⚡ How to Use
+
+### 🛠 Initialization
+To use the library, create an instance of `DKBotzPro` with the desired service type:
+
+```python
 from dkbotzpro import DKBotzPro
 
-# Initialize the DKBotzPro class for UPI QR generation
-dkbotzpro_qr = DKBotzPro(service="upi_qr")
+# Initialize for premium services
+dkbotz = DKBotzPro("premium")
 
-# Generate UPI QR code
-success, result = dkbotzpro_qr.convert(upi_id="paytmqr5lmwpa@ptys", payee_name="Paytm", amount="5.00")
+# Initialize for UPI QR generation
+dkbotz = DKBotzPro("upi_qr")
 
-if success:
-    print(f"QR Code generated successfully: {result}")
-else:
-    print(f"Error: {result}")
+# Initialize for Base64 encoding/decoding
+dkbotz = DKBotzPro("base64")
 ```
-<b>2. Base64 Encoding</b>
 
-You can encode any text into Base64 format using the encode() function.
+---
 
+## 🔑 Premium Services
+
+### ✅ Login
+Authenticate a user with username and password.
+
+```python
+status, response = dkbotz.premium_login("username", "password")
+print(status, response)
 ```
-from dkbotzpro import DKBotzPro
 
-# Initialize the DKBotzPro class for Base64 operations
-dkbotzpro_base64 = DKBotzPro(service="base64")
+### 🔍 Verify Product
+Check if a product is valid for a user.
 
-# Encode text to Base64
-encoded_text = dkbotzpro_base64.encode(text="Hello")
-print(f"Encoded text: {encoded_text}")
+```python
+status, response = dkbotz.premium_verify_product("username", "password", "product_name")
+print(status, response)
 ```
-<b>3. Base64 Decoding</b>
 
-You can decode a Base64-encoded string back to its original form using the decode() function.
+### ⚙️ Edit Server
+Modify server details for a specific product.
 
+```python
+status, response = dkbotz.premium_edit_server("username", "password", "product_name", "server1", 'server_main', "new_value")
+print(status, response)
 ```
-from dkbotzpro import DKBotzPro
 
-# Initialize the DKBotzPro class for Base64 operations
-dkbotzpro_base64 = DKBotzPro(service="base64")
+---
 
-# First encode some text to Base64
-encoded_text = dkbotzpro_base64.encode(text="Hello")
+## 💰 UPI QR Code Generator
+Generate a UPI QR code link for payment.
 
-# Now decode it back to the original text
-decoded_text = dkbotzpro_base64.decode(encoded_text)
-print(f"Decoded text: {decoded_text}")
-
+```python
+status, qr_link = dkbotz.convert("upi_id@bank", "Payee Name", "100.00")
+print(status, qr_link)
 ```
+
+---
+
+## 🔄 Base64 Encoding & Decoding
+
+### 📝 Encode Text
+Convert text into Base64 format.
+
+```python
+status, encoded = dkbotz.encode_text("Hello, DKBotz!")
+print(status, encoded)
+```
+
+### 🔓 Decode Text
+Convert Base64 back to plain text.
+
+```python
+status, decoded = dkbotz.decode_text(encoded)
+print(status, decoded)
+```
+
+---
+
+## ❌ Error Handling
+All functions return `False` with an error message if required parameters are missing or an exception occurs.
+
+```python
+status, message = dkbotz.premium_login("username")  # Missing password
+print(status, message)  # Output: False, "Missing parameters: password"
+```
+
+---
+
+### ✨ Enjoy using DKBotzPro! 😃 Need help? Contact support! 🤖
+
