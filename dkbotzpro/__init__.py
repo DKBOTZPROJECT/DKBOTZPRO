@@ -40,6 +40,7 @@ class DKBotzPro:
             
                 params = {"username": username, "password": password}
                 response = requests.get(PREMIUM_LOGIN_API, params=params)
+                response_data = response.json()
 
                 if response_data.get("status") is True:
                     return True, response_data
@@ -62,6 +63,7 @@ class DKBotzPro:
             
                 params = {"username": username, "password": password, "product": product}
                 response = requests.get(PREMIUM_PRODUCT_VERIFY_API, params=params)
+                response_data = response.json()
 
                 if response_data.get("status") is True:
                     return True, response_data
@@ -84,6 +86,7 @@ class DKBotzPro:
             
                 params = {"username": username, "password": password, "product": product, "servername": servername, "server_num": server_num, "value": value}
                 response = requests.get(PREMIUM_SERVER_API, params=params)
+                response_data = response.json()
 
                 if response_data.get("status") is True:
                     return True, response_data
@@ -108,8 +111,12 @@ class DKBotzPro:
                 response = requests.get(PREMIUM_LOGIN_API, params=params)
                 response_data = response.json()
                 
+                
 
                 if response_data.get("status") is True:
+                    servername = response_data.get("status", None).get("server", None)
+                    if not servername:
+                        return False, "Server Not Found"
                     return True, response_data
                 else:
                     return False, response_data.get("message", "Invalid Data")
