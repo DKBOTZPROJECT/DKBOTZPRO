@@ -32,37 +32,92 @@ class DKBotzPro:
     
     try:
         def premium_login(self, username=None, password=None):
-            is_valid, error = self.validate_params(username=username, password=password)
-            if not is_valid:
-                return False, error
+            try:
+                
+                is_valid, error = self.validate_params(username=username, password=password)
+                if not is_valid:
+                    return False, error
             
-            params = {"username": username, "password": password}
-            response = requests.get(PREMIUM_LOGIN_API, params=params)
-            return True, response.json()
+                params = {"username": username, "password": password}
+                response = requests.get(PREMIUM_LOGIN_API, params=params)
+
+                if response_data.get("status") is True:
+                    return True, response_data
+                else:
+                    return False, response_data.get("message", "Invalid Data")
+    
+            except Exception as e:
+                handle_exception(e)
+                return False, str(e)  # Return only the error message
+
     except Exception as e:
         handle_exception(e)
     
     try:
         def premium_verify_product(self, username=None, password=None, product=None):
-            is_valid, error = self.validate_params(username=username, password=password, product=product)
-            if not is_valid:
-                return False, error
+            try:
+                is_valid, error = self.validate_params(username=username, password=password, product=product)
+                if not is_valid:
+                    return False, error
             
-            params = {"username": username, "password": password, "product": product}
-            response = requests.get(PREMIUM_PRODUCT_VERIFY_API, params=params)
-            return True, response.json()
+                params = {"username": username, "password": password, "product": product}
+                response = requests.get(PREMIUM_PRODUCT_VERIFY_API, params=params)
+
+                if response_data.get("status") is True:
+                    return True, response_data
+                else:
+                    return False, response_data.get("message", "Invalid Data")
+    
+            except Exception as e:
+                handle_exception(e)
+                return False, str(e)  # Return only the error message
+
     except Exception as e:
         handle_exception(e)
     
     try:
-        def premium_edit_server(self, username=None, password=None, product=None, servername=None, server_num=None, value=None):
-            is_valid, error = self.validate_params(username=username, password=password, product=product, servername=servername, server_num=server_num, value=value)
-            if not is_valid:
-                return False, error
+        def premium_edit_server(self, username=None, password=None, servername=None, server_num=None, value=None):
+            try:
+                is_valid, error = self.validate_params(username=username, password=password, servername=servername, server_num=server_num, value=value)
+                if not is_valid:
+                    return False, error
             
-            params = {"username": username, "password": password, "product": product, "servername": servername, "server_num": server_num, "value": value}
-            response = requests.get(PREMIUM_SERVER_API, params=params)
-            return True, response.json()
+                params = {"username": username, "password": password, "product": product, "servername": servername, "server_num": server_num, "value": value}
+                response = requests.get(PREMIUM_SERVER_API, params=params)
+
+                if response_data.get("status") is True:
+                    return True, response_data
+                else:
+                    return False, response_data.get("message", "Invalid Data")
+    
+            except Exception as e:
+                handle_exception(e)
+                return False, str(e)  # Return only the error message
+
+    except Exception as e:
+        handle_exception(e)
+
+    try:
+        def premium_get_server(self, username=None, password=None, servername=None, server_num=None):
+            try:
+                is_valid, error = self.validate_params(username=username, password=password, servername=servername, server_num=server_num)
+                if not is_valid:
+                    return False, error
+
+                params = {"username": username, "password": password}
+                response = requests.get(PREMIUM_LOGIN_API, params=params)
+                response_data = response.json()
+                
+
+                if response_data.get("status") is True:
+                    return True, response_data
+                else:
+                    return False, response_data.get("message", "Invalid Data")
+    
+            except Exception as e:
+                handle_exception(e)
+                return False, str(e)  # Return only the error message
+
     except Exception as e:
         handle_exception(e)
     
