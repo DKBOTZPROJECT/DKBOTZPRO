@@ -2,7 +2,6 @@ import requests
 import base64
 from .api import *
 
-
 class DKBotzPro:
     """Handles different services dynamically."""
 
@@ -84,7 +83,7 @@ class DKBotzPro:
                 if not is_valid:
                     return False, error
             
-                params = {"username": username, "password": password, "product": product, "servername": servername, "server_num": server_num, "value": value}
+                params = {"username": username, "password": password, "servername": servername, "server_num": server_num, "value": value}
                 response = requests.get(PREMIUM_SERVER_API, params=params)
                 response_data = response.json()
 
@@ -114,13 +113,21 @@ class DKBotzPro:
                 
 
                 if response_data.get("status") is True:
-                    servernamez = response_data.get("status", None).get("server", None)
+                    data = response_data.get("data", None)
+                    if not data:
+                        return False, "Data Not Found"
+                    
+                    status = data.get("status", None)
+                    if not status:
+                        return False, "Data Status Not Found"
+                    
+                    servernamez = status.get("server", None)
                     if not servernamez:
                         return False, "Server Not Found"
-
+                    
                     servernamez =  servernamez.get(servername, None)
                     if not servernamez:
-                        return False, "Server Not Found"
+                        return False, "Server Name Not Found"
 
                     server_num = servernamez.get(server_num, None)
                     if not server_num:
@@ -169,3 +176,10 @@ class DKBotzPro:
             return True, base64.b64decode(encoded_text.encode('utf-8')).decode('utf-8')
     except Exception as e:
         handle_exception(e)
+
+
+
+
+
+def handle_exception(self, e):
+    return False, f"An error occurred: {str(e)}"
