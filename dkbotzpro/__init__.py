@@ -114,10 +114,19 @@ class DKBotzPro:
                 
 
                 if response_data.get("status") is True:
-                    servername = response_data.get("status", None).get("server", None)
-                    if not servername:
+                    servernamez = response_data.get("status", None).get("server", None)
+                    if not servernamez:
                         return False, "Server Not Found"
-                    return True, response_data
+
+                    servernamez =  servernamez.get(servername, None)
+                    if not servernamez:
+                        return False, "Server Not Found"
+
+                    server_num = servernamez.get(server_num, None)
+                    if not server_num:
+                        return False, "Server Num Not Found"
+                    
+                    return True, server_num
                 else:
                     return False, response_data.get("message", "Invalid Data")
     
