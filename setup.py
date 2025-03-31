@@ -21,11 +21,6 @@ classify = [
 ]
 requirements = [
     "requests",
-    "pymongo",
-    "aiofiles",
-    "aiohttp",
-    "motor",
-    "pyromod",
 ]
 
 
