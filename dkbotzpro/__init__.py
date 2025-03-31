@@ -12,6 +12,8 @@ class DKBotzPro:
             self.login = self.premium_login
             self.verify_product = self.premium_verify_product
             self.edit_server = self.premium_edit_server
+            self.get_server = self.premium_get_server
+
         elif service == "upi_qr":
             self.execute = self.convert  # Allow only convert
         elif service == "base64":
