@@ -19,8 +19,10 @@ class DKBotzPro:
         elif service == "base64":
             self.encode_text = self.encode
             self.decode_text = self.decode
+        elif service == "upgrade":
+            self.execute = self.check_upgrade
         else:
-            raise ValueError("Invalid service type! Choose 'premium', 'upi_qr', or 'base64'.")
+            raise ValueError("Invalid service type! Choose 'premium', 'upi_qr', 'upgrade', or 'base64'.")
     
     def validate_params(self, **kwargs):
         missing_params = [key for key, value in kwargs.items() if value is None or value == ""]
@@ -30,7 +32,21 @@ class DKBotzPro:
     
     def handle_exception(self, e):
         return False, f"An error occurred: {str(e)}"
-    
+        
+    def check_upgrade(self, app_name: str):
+        url = f"https://upgrader.dkbotzpro.in/?app_name={app_name}"
+        try:
+            response = requests.get(url, timeout=10)
+            data = response.json()
+            success = data.get("success")
+            message = data.get("message", "There is a New Update Available For This App. Visit - dkbotzpro.in")
+            if success is True:
+                return True, message
+            else:
+                return False, message
+        except:
+            return False, "fail"
+            
     try:
         def premium_login(self, username=None, password=None):
             try:
